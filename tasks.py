@@ -59,7 +59,7 @@ TASK_DEFINITIONS = {
         "PID file somewhere. The server needs to be restarted and "
         "listening on port 80. Diagnose the issue, clean up any stale state, "
         "and restart the service.\n"
-        "give step by step commands.\n"
+        "give step by step commands to fix the issue.\n"
         "IMPORTANT: This is a Docker container — use 'service nginx start' "
         "instead of 'systemctl'."
     ),

@@ -219,13 +219,6 @@ def main() -> None:
 
     # Summary
     env.close()
-    print("\n" + "#" * 50)
-    print("FINAL RESULTS")
-    for idx, score in enumerate(all_scores):
-        print(f"Task {idx + 1}: {score:.2f} / 1.00")
-    if all_scores:
-        print(f"Overall Average: {sum(all_scores)/len(all_scores):.2f}")
-    print("#" * 50)
 
 
 if __name__ == "__main__":
