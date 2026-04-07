@@ -5,3 +5,22 @@ runtime: fastapi
 app: server.app:app
 port: 7860
 
+tasks:
+  - id: "task_1_permissions"
+    name: "Fix File Permissions"
+    grader: "tasks:_grade_permissions"
+  - id: "task_2_service"
+    name: "Restart Crashed Web Server"
+    grader: "tasks:_grade_service"
+  - id: "task_3_nginx_config"
+    name: "Fix Broken Nginx Configuration"
+    grader: "tasks:_grade_nginx_config"
+  - id: "task_4_port_conflict"
+    name: "Resolve Port Conflict"
+    grader: "tasks:_grade_port_conflict"
+  - id: "task_5_disk_pressure"
+    name: "Emergency Disk Clearance"
+    grader: "tasks:_grade_disk_pressure"
+  - id: "task_6_dns_poisoning"
+    name: "Fix Local Service Discovery"
+    grader: "tasks:_grade_dns_poisoning"

@@ -59,14 +59,16 @@ def log_step(step: int, action: str, reward: float, done: bool, error: Optional[
     error_val = error if error else "null"
     done_val = str(done).lower()
     print(
-        f"[STEP]  step={step} action={action} reward={reward:.2f} done={done_val} error={error_val}",
+        f"[STEP] step={step} action={action} reward={reward:.2f} done={done_val} error={error_val}",
         flush=True,
     )
 
 
-def log_end(success: bool, steps: int, rewards: List[float]) -> None:
+def log_end(success: bool, steps: int, rewards: List[float], task: str) -> None:
+    raw_score = sum(rewards)
+    final_score = max(0.01, min(0.99, float(raw_score)))
     rewards_str = ",".join(f"{r:.2f}" for r in rewards)
-    print(f"[END] success={str(success).lower()} steps={steps} rewards={rewards_str}", flush=True)
+    print(f"[END] success={str(success).lower()} steps={steps} score={final_score:.2f} rewards={rewards_str} task={task}", flush=True)
 
 
 # ---------------------------------------------------------------------------
@@ -211,7 +213,7 @@ def main() -> None:
                 success = False
 
         finally:
-            log_end(success=success, steps=steps_taken, rewards=rewards)
+            log_end(success=success, steps=steps_taken, rewards=rewards, task=task_name)
             total_score = sum(rewards)
             all_scores.append(total_score)
 
