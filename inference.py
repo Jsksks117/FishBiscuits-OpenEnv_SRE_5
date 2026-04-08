@@ -147,8 +147,8 @@ def main() -> None:
     async_env = SreAgentEnv(base_url="http://localhost:7860", message_timeout_s=180.0)
     env = async_env.sync()
 
-    # We run 9 episodes (one per task — the environment cycles tasks on reset)
-    tasks_to_run = 9
+    # We run 8 episodes (one per task — the environment cycles tasks on reset)
+    tasks_to_run = 8
     all_scores = []
 
     for episode in range(tasks_to_run):
