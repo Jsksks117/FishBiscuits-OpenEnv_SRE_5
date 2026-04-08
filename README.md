@@ -256,10 +256,10 @@ Baseline results evaluated using the `llama-3.3-70b-versatile` model based on re
 | task_1 | `llama-3.3-70b-versatile` | 2 | 0.99 | `0.99` | Found and fixed the permission issue in one command |
 | task_2 | `llama-3.3-70b-versatile` | 4 | 0.99 | `0.01, 0.98` | Diagnosed stale PID then restarted Nginx |
 | task_3 | `llama-3.3-70b-versatile` | 3 | 0.99 | `0.40, 0.00, 0.59` | Validated config and started Nginx successfully |
-| task_4 | `llama-3.3-70b-versatile` | 20 | 0.01 | `0.01, 0.00, ...` | Struggles with exhaustive log searches and rsyslog restart logic |
-| task_5 | `llama-3.3-70b-versatile` | 20 | 0.49 | `0.34, 0.00, 0.00, 0.00, 0.15, ...` | Solved process/permission issues but missed auth chain |
-| task_6 | `llama-3.3-70b-versatile` | 20 | 0.25 | `0.01, 0.09, 0.15, -0.15, 0.15, -0.15, 0.15, ...` | Struggled with complex Nginx syntax loop |
-| task_7 | `llama-3.3-70b-versatile` | 20 | 0.55 | `0.15, 0.15, 0.00, 0.10, 0.00, 0.15, ...` | Successfully cleared disk and recreated log files |
+| task_4 | `llama-3.3-70b-versatile` | 10 | 0.01 | `0.01, 0.00, ...` | Struggles with exhaustive log searches and rsyslog restart logic |
+| task_5 | `llama-3.3-70b-versatile` | 10 | 0.49 | `0.34, 0.00, 0.00, 0.00, 0.15, ...` | Solved process/permission issues but missed auth chain |
+| task_6 | `llama-3.3-70b-versatile` | 10 | 0.25 | `0.01, 0.09, 0.15, -0.15, 0.15, -0.15, 0.15, ...` | Struggled with complex Nginx syntax loop |
+| task_7 | `llama-3.3-70b-versatile` | 10 | 0.55 | `0.15, 0.15, 0.00, 0.10, 0.00, 0.15, ...` | Successfully cleared disk and recreated log files |
 
 ## Project Layout
 
