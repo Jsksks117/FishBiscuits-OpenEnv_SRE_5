@@ -112,27 +112,7 @@ TASK_DEFINITIONS = {
         "pkill nginx 2>/dev/null || true\n"
     ),
 },
-"task_4_port_conflict": {
-    "name": "Resolve Port Conflict",
-    "difficulty": "medium",
-    "description": (
-        "The Nginx web server refuses to start because Port 80 is already in use "
-        "by another process. Identify the rogue process holding the port, "
-        "terminate it, and then successfully start the nginx service.\n"
-        "Use 'service nginx start' and verify it's listening on port 80."
-    ),
-    "setup_script": (
-        "set -e\n"
-        "export DEBIAN_FRONTEND=noninteractive\n"
-        "apt-get update -qq > /dev/null 2>&1\n"
-        "apt-get install -y -qq nginx net-tools procps > /dev/null 2>&1\n"
-        "service nginx stop || true\n"
-        "# Start a rogue python listener on port 80\n"
-        "python3 -c 'import socket; s=socket.socket(); s.bind((\"0.0.0.0\", 80)); s.listen(1); import time; time.sleep(3600)' >/dev/null 2>&1 &\n"
-        "sleep 1\n"
-    ),
-},
-"task_5_disk_pressure": {
+"task_4_disk_pressure": {
     "name": "Emergency Disk Clearance",
     "difficulty": "hard",
     "description": (
@@ -152,7 +132,7 @@ TASK_DEFINITIONS = {
     ),
 },
 
-"task_6_db_pipeline": {
+"task_5_db_pipeline": {
     "name": "DB Corruption Pipeline",
     "difficulty": "hard",
     "description": (
@@ -189,7 +169,7 @@ TASK_DEFINITIONS = {
         "chmod +x /usr/local/bin/myappd\n"
     ),
 },
-"task_7_web_restore": {
+"task_6_web_restore": {
     "name": "Webserver Pipeline Complete Restore",
     "difficulty": "hard",
     "description": (
@@ -225,7 +205,7 @@ TASK_DEFINITIONS = {
         "chown root:root /var/www/html\n"
     ),
 },
-"task_8_disk_clean": {
+"task_7_disk_clean": {
     "name": "Disk Clean & Service Chain",
     "difficulty": "hard",
     "description": (
@@ -285,11 +265,10 @@ def grade_task(task_id: str, container) -> float:
         "task_1_permissions": _grade_permissions,
         "task_2_service": _grade_service,
         "task_3_nginx_config": _grade_nginx_config,
-        "task_4_port_conflict": _grade_port_conflict,
-        "task_5_disk_pressure": _grade_disk_pressure,
-        "task_6_db_pipeline": _grade_db_pipeline,
-        "task_7_web_restore": _grade_web_restore,
-        "task_8_disk_clean": _grade_disk_clean,
+        "task_4_disk_pressure": _grade_disk_pressure,
+        "task_5_db_pipeline": _grade_db_pipeline,
+        "task_6_web_restore": _grade_web_restore,
+        "task_7_disk_clean": _grade_disk_clean,
     }
     grader = graders.get(task_id)
     if grader is None:
@@ -454,27 +433,7 @@ def _grade_nginx_config(container) -> float:
     return max(0.01, min(0.99, round(score, 2)))
 
 
-def _grade_port_conflict(container) -> float:
-    """
-    Task 4 (Medium): Resolve Port Conflict.
 
-    Checkpoints:
-      - Rogue Python process killed                  -> +0.4
-      - Nginx is the listener on port 80             -> +0.6
-    """
-    score = 0.0
-
-    # Checkpoint 1: Did they kill the rogue Python process? (+0.4)
-    rogue_proc = _exec(container, "pgrep -f 'python3 -c import socket'")
-    if not rogue_proc:
-        score += 0.4
-
-    # Checkpoint 2: Is Nginx now the one holding Port 80? (+0.6)
-    port_owner = _exec(container, "netstat -tulpn | grep :80 | grep nginx || echo 'NONE'")
-    if "nginx" in port_owner:
-        score += 0.6
-
-    return max(0.01, min(0.99, round(score, 2)))
 
 
 def _grade_disk_pressure(container) -> float:
